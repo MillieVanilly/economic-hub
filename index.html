@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matt's Economic Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Matt's Economic Hub</h1>
+            <p>Interactive housing and economic data for U.S. Metropolitan Statistical Areas</p>
+        </header>
+        
+        <div class="search-container">
+            <label for="msa-select">Select Metropolitan Statistical Area:</label>
+            <div class="select-wrapper">
+                <select id="msa-select">
+                    <option value="">-- Select an MSA --</option>
+                    <!-- MSA options will be loaded dynamically -->
+                </select>
+            </div>
+            <button id="load-data-btn">Load Data</button>
+        </div>
+        
+        <div id="loading" class="hidden">
+            <div class="loading-spinner"></div>
+            <p>Loading data...</p>
+        </div>
+        
+        <div id="data-container" class="hidden">
+            <div class="section" id="msa-header">
+                <h2 id="msa-title">Market at a Glance</h2>
+                <p id="msa-subtitle"></p>
+            </div>
+            
+            <div class="section" id="economic-conditions">
+                <h2>ECONOMIC CONDITIONS</h2>
+                <div class="data-grid">
+                    <div class="chart-container" id="employment-chart">
+                        <!-- Employment chart will be rendered here -->
+                    </div>
+                    <div class="data-table" id="labor-data">
+                        <h3>Labor Force Overview</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="2">3-Month Average</th>
+                                    <th colspan="2">3-Month Year-Over-Year Change</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>Number</th>
+                                    <th>Percent</th>
+                                    <th>Number</th>
+                                    <th>Percent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Labor Force</td>
+                                    <td id="labor-force-num">-</td>
+                                    <td id="labor-force-pct">-</td>
+                                    <td id="labor-force-yoy-num">-</td>
+                                    <td id="labor-force-yoy-pct">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Resident Employment</td>
+                                    <td id="employment-num">-</td>
+                                    <td id="employment-pct">-</td>
+                                    <td id="employment-yoy-num">-</td>
+                                    <td id="employment-yoy-pct">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Unemployment Rate (%)</td>
+                                    <td id="unemployment-num">-</td>
+                                    <td id="unemployment-pct">-</td>
+                                    <td id="unemployment-yoy-num">-</td>
+                                    <td id="unemployment-yoy-pct">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="data-source">Data Source: U.S. Bureau of Labor Statistics</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="population-households">
+                <h2>POPULATION & HOUSEHOLDS</h2>
+                <div class="data-grid">
+                    <div class="chart-container" id="population-chart">
+                        <!-- Population chart will be rendered here -->
+                    </div>
+                    <div class="data-table" id="population-data">
+                        <h3>Population and Household Change</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="2">April 2010</th>
+                                    <th colspan="2">April 2020</th>
+                                    <th colspan="2">Annual Change 2010-2020</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>Number</th>
+                                    <th>Percent</th>
+                                    <th>Number</th>
+                                    <th>Percent</th>
+                                    <th>Number</th>
+                                    <th>Percent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Population</td>
+                                    <td id="pop-2010-num">-</td>
+                                    <td id="pop-2010-pct">-</td>
+                                    <td id="pop-2020-num">-</td>
+                                    <td id="pop-2020-pct">-</td>
+                                    <td id="pop-change-num">-</td>
+                                    <td id="pop-change-pct">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Households</td>
+                                    <td id="hh-2010-num">-</td>
+                                    <td id="hh-2010-pct">-</td>
+                                    <td id="hh-2020-num">-</td>
+                                    <td id="hh-2020-pct">-</td>
+                                    <td id="hh-change-num">-</td>
+                                    <td id="hh-change-pct">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="data-source">Data Source: U.S. Census Bureau</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="housing-market">
+                <h2>HOUSING MARKET CONDITIONS</h2>
+                <div class="data-grid">
+                    <div class="chart-container" id="permits-chart">
+                        <!-- Building permits chart will be rendered here -->
+                    </div>
+                    <div class="data-table" id="housing-inventory">
+                        <h3>Housing Inventory by Tenure (2020)</h3>
+                        <table class="inventory-table">
+                            <tbody>
+                                <tr>
+                                    <td>Total Housing Units</td>
+                                    <td id="total-units">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Occupied</td>
+                                    <td id="occupied-units">-</td>
+                                </tr>
+                                <tr class="indent">
+                                    <td>Owners</td>
+                                    <td id="owner-units">-</td>
+                                </tr>
+                                <tr class="indent">
+                                    <td>% Owners</td>
+                                    <td id="owner-pct">-</td>
+                                </tr>
+                                <tr class="indent">
+                                    <td>Renters</td>
+                                    <td id="renter-units">-</td>
+                                </tr>
+                                <tr class="indent">
+                                    <td>% Renters</td>
+                                    <td id="renter-pct">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Vacant</td>
+                                    <td id="vacant-units">-</td>
+                                </tr>
+                                <tr class="indent">
+                                    <td>Available for Sale</td>
+                                    <td id="for-sale">-</td>
+                                </tr>
+                                <tr class="indent">
+                                    <td>Available for Rent</td>
+                                    <td id="for-rent">-</td>
+                                </tr>
+                                <tr class="indent">
+                                    <td>Other Vacant</td>
+                                    <td id="other-vacant">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="data-source">Data Source: U.S. Census Bureau, 2020 Decennial Census</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Matt's Economic Hub | Data Sources: U.S. Census Bureau, U.S. Bureau of Labor Statistics</p>
+            <p class="disclaimer">This application is for demonstration purposes. Data presented is simulated and does not represent actual MSA statistics.</p>
+        </footer>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html> 
